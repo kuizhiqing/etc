@@ -1,0 +1,169 @@
+
+syntax enable
+
+set nocompatible
+filetype off
+
+filetype plugin on
+filetype indent on
+
+set nu
+set history=700
+set autoread
+set so=8
+set wildmenu
+set wildignore=*.o,*~,*.pyc
+set ruler
+set cmdheight=1
+set hid
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set lazyredraw
+set magic
+set showmatch
+set mat=2
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+set viminfo^=%
+set laststatus=2
+
+colorscheme desert
+set background=dark
+
+if has("gui_running")
+    set guioptions-=T
+    set guioptions+=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+set encoding=utf8
+set ffs=unix,dos,mac
+set nobackup
+set nowb
+set noswapfile
+set expandtab
+set smarttab
+set shiftwidth=4
+set tabstop=4
+set lbr
+set tw=500
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+
+map j gj
+map k gk
+map <space> /
+map <c-space> ?
+map <silent> <leader><cr> :noh<cr>
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+map <leader>bd :Bclose<cr>
+map <leader>ba :1,1000 bd!<cr>
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+nmap <leader>w :w!<cr>
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+nn <M-1> 1gt
+nn <M-2> 2gt
+nn <M-3> 3gt
+nn <M-4> 4gt
+nn <M-5> 5gt
+nn <M-6> 6gt
+nn <M-7> 7gt
+nn <M-8> 8gt
+nn <M-9> 9gt
+
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+
+map 0 ^
+
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+
+vnoremap <silent> gv :call VisualSelection('gv')<CR>
+
+map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+map <leader><space> :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
+vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
+map <leader>cc :botright cope<cr>
+map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
+map <leader>ss :setlocal spell!<cr>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+map <leader>q :e ~/buffer<cr>
+map <leader>pp :setlocal paste!<cr>
+
+au CursorHold * checktime
+
+call plug#begin()
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+" Plug '/usr/local/opt/fzf'
+Plug 'preservim/nerdtree'
+Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'yegappan/grep'
+Plug 'mileszs/ack.vim'
+" ripgrep
+Plug 'pechorin/any-jump.vim'
+Plug 'zivyangll/git-blame.vim'
+call plug#end()
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-i> :NERDTreeFind<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap <C-g> :<C-u>call gitblame#echo()<CR>
+nnoremap <C-d> :AnyJump<CR>
+
+let mapleader = "\\"
+let g:mapleader = ","

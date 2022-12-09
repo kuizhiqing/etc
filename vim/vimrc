@@ -167,3 +167,4 @@ nnoremap <C-d> :AnyJump<CR>
 
 let mapleader = "\\"
 let g:mapleader = ","
+au BufRead,BufNewFile *.go set filetype=go

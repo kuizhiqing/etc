@@ -1,3 +1,15 @@
+
+# Install
+
+```shell
+cp vimrc ~/.vimrc
+```
+
+In `vi`,
+```shell
+:PlugInstall
+```
+
 ## Install [Plug](https://github.com/junegunn/vim-plug)
 
 ```shell

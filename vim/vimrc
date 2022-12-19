@@ -146,7 +146,8 @@ map <leader>pp :setlocal paste!<cr>
 au CursorHold * checktime
 
 call plug#begin()
-Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 " Plug '/usr/local/opt/fzf'
 Plug 'preservim/nerdtree'

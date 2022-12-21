@@ -10,4 +10,9 @@ RUN curl -fLo ~/.vimrc --create-dirs https://raw.githubusercontent.com/kuizhiqin
 
 RUN vim +'PlugInstall --sync' +qa # no cache
 
-RUN apt-get -y install python3 python3-dev python3-pip
+RUN apt-get -y install python3 # python3-dev python3-pip
+
+RUN curl -fLo ~/.git-prompt.sh --create-dirs https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+RUN curl -fLo ~/.git-completion.bash --create-dirs https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+
+RUN curl -fLo ~/.bashrc --create-dirs https://raw.githubusercontent.com/kuizhiqing/etc/main/bash/bashrc

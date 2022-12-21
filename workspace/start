@@ -1,0 +1,7 @@
+docker run -it \
+  --name workspace \
+  -v $HOME:$HOME \
+  --workdir=$HOME \
+  --net=host \
+  registry.baidubce.com/kuizhiqing/workspace:`arch` \
+  bash

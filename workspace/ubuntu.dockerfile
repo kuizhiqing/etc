@@ -1,6 +1,8 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
-RUN sed -i "s/ports.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list && apt-get update
+RUN sed -i "s/ports.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list \
+    && sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list \
+    && apt-get update
 
 RUN apt-get -y install git vim ripgrep net-tools curl wget
 

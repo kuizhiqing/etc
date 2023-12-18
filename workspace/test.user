@@ -1,0 +1,16 @@
+docker run -it \
+  --rm \
+  --name test \
+  -v $HOME/p664:$HOME \
+  --privileged \
+  --workdir=$HOME \
+  --net=host \
+  registry.baidubce.com/kuizhiqing/workspace-dev:`arch` \
+  bash
+
+exit
+  --user 1002:$GID \
+  #--user $UID:$GID \
+  --volume="/etc/group:/etc/group:ro" \
+  --volume="/etc/passwd:/etc/passwd:ro" \
+  --volume="/etc/shadow:/etc/shadow:ro" \

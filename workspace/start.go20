@@ -1,0 +1,12 @@
+docker run -it \
+  --name go20 \
+  -v $HOME:$HOME \
+  --workdir=$HOME \
+  --net=host \
+  registry.baidubce.com/kuizhiqing/workspace-dev:go1.20 \
+  bash
+
+#  --user $UID:$GID \
+#  --volume="/etc/group:/etc/group:ro" \
+#  --volume="/etc/passwd:/etc/passwd:ro" \
+#  --volume="/etc/shadow:/etc/shadow:ro" \

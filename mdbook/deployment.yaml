@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mdbook
+  labels:
+    app: mdbook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mdbook
+  template:
+    metadata:
+      labels:
+        app: mdbook
+    spec:
+      hostNetwork: true
+      containers:
+      - name: mdbook
+        image: ghcr.io/kuizhiqing/mdbook:v0.4.36
+        command:
+        - mdbook
+        args:
+        - serve
+        - "-p"
+        - "8000"
+        - "-n"
+        - "0.0.0.0"
+        workingDir: /workspace
+        volumeMounts:
+        - mountPath: /workspace
+          name: home-volume
+      volumes:
+      - name: home-volume
+        hostPath:
+          path: /home # TODO

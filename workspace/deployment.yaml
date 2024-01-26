@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev
+  labels:
+    app: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      hostNetwork: true
+      containers:
+      - name: dev
+        image: ghcr.io/kuizhiqing/workspace:go1.20
+        stdin: true
+        workingDir: /home
+        volumeMounts:
+        - mountPath: /home
+          name: home-volume
+      volumes:
+      - name: home-volume
+        hostPath:
+          path: /home

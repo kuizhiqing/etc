@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code
+  labels:
+    app: code
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code
+  template:
+    metadata:
+      labels:
+        app: code
+    spec:
+      containers:
+      - name: code
+        env:
+        - name: PUID
+          value: "0"
+        - name: PGID
+          value: "0"
+        - name: TZ
+          value: "Asia/Shanghai"
+        - name: DEFAULT_WORKSPACE
+          value: /home
+        - name: PASSWORD
+          value: ihaveadream
+        image: linuxserver/code-server:4.21.1
+        stdin: true
+        workingDir: /home
+        volumeMounts:
+        - mountPath: /config
+          name: config-volume
+        - mountPath: /home
+          name: home-volume
+        ports:
+        - containerPort: 8080
+      volumes:
+      - name: config-volume
+        hostPath:
+          path: /home/config
+      - name: home-volume
+        hostPath:
+          path: /home/
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-service
+spec:
+  type: NodePort
+  selector:
+    app: code
+  ports:
+    - protocol: TCP
+      port: 8443
+      targetPort: 8443
+      nodePort: 30080

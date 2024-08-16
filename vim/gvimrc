@@ -1,0 +1,3 @@
+set guifont=Consolas:h18
+set lines=60
+set columns=180

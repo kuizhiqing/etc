@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -z $CHRONICLE_ROOT ]; then
+    echo CHRONICLE_ROOT unset
+    exit 1
+fi
+
+if [ -d $CHRONICLE_ROOT/$(date +%Y/%m) ]; then
+    mkdir -p $CHRONICLE_ROOT/$(date +%Y/%m)
+fi
+
+dayfile=$CHRONICLE_ROOT/$(date +%Y/%m/%V)
+echo [$(date)] >> $dayfile
+echo $@ >> $dayfile

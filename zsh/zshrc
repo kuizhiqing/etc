@@ -1,0 +1,55 @@
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+alias ls='ls -hFG'
+alias l='ls -lF'
+alias ll='ls -alF'
+alias lt='ls -ltrF'
+alias ll='ls -alF'
+alias lls='ls -alSrF'
+alias llt='ls -altrF'
+alias ls="ls -ph --color=auto"
+
+alias vi="vim"
+
+if echo hello|grep --color=auto l >/dev/null 2>&1; then
+  alias grep='grep --color=always'
+  export GREP_COLOR="1;31"
+fi
+
+export CLICOLOR="1"
+
+alias fzf='~/.vim/plugged/fzf/bin/fzf'
+
+onall () {
+    if [[ $1 == "--help" ]]; then
+        echo "Usage: onall <command>"
+        return 0
+    fi
+    osascript -e "tell application \"Terminal\"
+        repeat with w in windows
+            repeat with t in tabs of w
+                do script \"${1//\"/\\\"}\" in t
+            end repeat
+        end repeat
+    end tell"
+}
+
+source ~/.git-prompt.sh
+
+# Load version control information
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:git:*' formats '%b'
+
+# Set up the prompt (with git branch name)
+setopt PROMPT_SUBST
+
+PROMPT='[%n@m3 %F{green}${(%):-%~} %F{blue}(${vcs_info_msg_0_})%F{white}] $ '
+
+alias venv="source ~/.venv/bin/activate"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

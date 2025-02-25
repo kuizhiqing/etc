@@ -35,6 +35,7 @@ set laststatus=2
 
 colorscheme desert
 set background=dark
+highlight Normal ctermfg=gray
 
 if has("gui_running")
     set guioptions-=T
